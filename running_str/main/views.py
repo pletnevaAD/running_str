@@ -41,7 +41,7 @@ def generate_video_stream(text, background_color, fontcolor):
         filename = str(uuid.uuid4()) + '.mp4'
         file_path = os.path.join('C:\\Users\\pletn\\VSCodeProjects\\running_str\\running_str\\main\\static\\media', filename)
         input = ffmpeg.input(f'color=c={background_color}:s={width}x{height}:d={duration}', f='lavfi')
-        input_with_text = input.drawtext(text=text, fontcolor=fontcolor, y=(height-10)/2, x=f"-1*(tw-{width}+10)*t/{duration}", fontsize=20)
+        input_with_text = input.drawtext(text=text, fontcolor=fontcolor, y=(height-10)/2, x=f'-tw*t/{duration}', fontsize=20)
         out = ffmpeg.output(input_with_text, file_path).overwrite_output()
         ffmpeg.run(out, capture_stdout=True, capture_stderr=True)  
         return filename
